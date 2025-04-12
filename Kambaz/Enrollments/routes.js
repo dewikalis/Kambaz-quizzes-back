@@ -2,7 +2,6 @@ import * as enrollmentsDao from "./dao.js";
 export default function EnrollmentsRoutes(app) {
   app.get("/api/enrollments/current", async (req, res) => {
     const currentUser = req.session["currentUser"];
-    console.log(req.session)
     if (!currentUser || !currentUser._id) {
       res.sendStatus(400).send(req.sesion);
       return
@@ -13,7 +12,6 @@ export default function EnrollmentsRoutes(app) {
   });
 
   app.post("/api/enrollments/current", async (req, res) => {
-    console.log(req.session)
     const currentUser = req.session["currentUser"];
     const { courseId } = req.body;
     const enrollments = await enrollmentsDao.toggleUserInCourse(currentUser._id, courseId);
