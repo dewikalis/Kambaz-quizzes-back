@@ -9,22 +9,6 @@ export default function QuizRoutes(app) {
     res.json(quizzes);
   };
 
-  const getUserQuizzesInCourse = async (req, res) => {
-    const currentUser = req.session["currentUser"];
-    if (!currentUser) {
-      res.status(400).send(req.session);
-      return
-    }
-    const { cid } = req.params;
-    const courses = await findCoursesForUser(currentUser._id)
-    if (!courses.some(course => course._id === cid)) {
-      res.status(400)
-      return
-    }
-    const quizzes = await dao.findQuizzesForUserInCourse(currentUser._id, cid);
-    res.json(quizzes);
-  };
-
   const createQuiz = async (req, res) => {
     const currentUser = req.session["currentUser"];
     console.log("CREATING QUIZ", req.body, currentUser)
@@ -37,7 +21,6 @@ export default function QuizRoutes(app) {
     res.send(status)
   }
 
-  app.get("/api/courses/:cid/quizzes", getQuizzesForCourse);
   app.get("/api/quizzes/courses/:cid", getQuizzesForCourse);
   app.post("/api/quizzes", createQuiz);
 }

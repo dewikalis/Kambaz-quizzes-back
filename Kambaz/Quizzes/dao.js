@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 import { quizScoresModel } from "./QuizScores/model.js";
-// import enrollmentsModel from "../Enrollments/model.js"
-// import { findCoursesForUser } from "../Enrollments/dao.js";
 
 export function findQuizzesForCourse(courseId) {
   return model.find({ course: courseId });
