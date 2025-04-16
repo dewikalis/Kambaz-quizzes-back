@@ -3,7 +3,7 @@ export default function EnrollmentsRoutes(app) {
   app.get("/api/enrollments/current", async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser || !currentUser._id) {
-      res.sendStatus(400).send(req.sesion);
+      res.sendStatus(400).send(req.session);
       return
     }
 
