@@ -1,6 +1,5 @@
 import * as dao from "./dao.js";
 import { v4 as uuid } from "uuid";
-import { findCoursesForUser } from "../Enrollments/dao.js";
 
 export default function QuizRoutes(app) {
   const getQuizzesForCourse = async (req, res) => {
@@ -21,6 +20,21 @@ export default function QuizRoutes(app) {
     res.send(status)
   }
 
+  const deleteQuiz = async (req, res) => {
+    const { qid } = req.params;
+    await dao.deleteQuiz(qid)
+    res.send(200)
+  }
+
+  const updateQuiz = async (req, res) => {
+    const { qid } = req.params;
+    const data = dao.updateQuiz(qid, req.body);
+
+    res.send(data);
+  }
+
   app.get("/api/quizzes/courses/:cid", getQuizzesForCourse);
   app.post("/api/quizzes", createQuiz);
+  app.delete("/api/quizzes/:qid", deleteQuiz)
+  app.put("/api/quizzes/:qid", updateQuiz)
 }
