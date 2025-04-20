@@ -21,6 +21,17 @@ export default function QuizRoutes(app) {
     res.send(status)
   }
 
+
+  app.put("/api/quizzes/QuizEditor/:qid", async (req, res) => {
+    const { quizId } = req.params;
+    const {  title, description, assignTo, type, points, group, shuffle, time, attempts, howManyAttempts, showCorrectAnswer, code,
+    oneQuestion, webcam, lock, due, from, until, questions } = req.body;
+
+    const status = await dao.updateQuiz(quizId, { title, description, assignTo, type, points, group, shuffle, time, attempts, howManyAttempts, showCorrectAnswer, code,
+      oneQuestion, webcam, lock, due, from, until, questions })
+    res.send(status)
+  })
+
   app.get("/api/quizzes/courses/:cid", getQuizzesForCourse);
   app.post("/api/quizzes", createQuiz);
 }

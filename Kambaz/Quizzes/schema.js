@@ -26,6 +26,7 @@ const quizSchema = new mongoose.Schema(
     shuttleAnswer: Boolean,
     timeLimit: Number,
     multipleAttempts: Boolean,
+    howManyAttempts: Number,
     showCorrectAnswer: Boolean,
     accessCode: String,
     oneQuestion: Boolean,
