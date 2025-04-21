@@ -42,7 +42,7 @@ app.use(
       process.env.NETLIFY_URL,
       "http://localhost:5173",
       "http://localhost:4000",
-      "https://ornate-sunflower-478800.netlify.app",
+      "https://kambazquizgroupproject.netlify.app",
     ].filter(Boolean),
   })
 );
