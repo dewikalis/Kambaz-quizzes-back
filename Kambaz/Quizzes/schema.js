@@ -5,14 +5,14 @@ const questionSchema = new mongoose.Schema({
   _id: String,
   title: String,
   description: String,
-  correctOption: Number,
   type: {
     type: String,
     enum: ["MULTIPLE-CHOICE", "TRUE-FALSE", "FILL-IN"],
     default: "MULTIPLE-CHOICE",
   },
   points: Number,
-  answers: [String]
+  answers: [String],
+  choices: [String]
 })
 
 const quizSchema = new mongoose.Schema(

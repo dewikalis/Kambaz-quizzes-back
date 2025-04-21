@@ -28,13 +28,34 @@ export default function QuizRoutes(app) {
 
   const updateQuiz = async (req, res) => {
     const { qid } = req.params;
-    const data = dao.updateQuiz(qid, req.body);
+    const data = await dao.updateQuiz(qid, req.body);
 
-    res.send(data);
+    res.json(data);
+  }
+
+  const takeQuiz = async (req, res) => {
+    const { qid } = req.params;
+    const { questions, points } = req.body;
+    const currentUser = req.session["currentUser"];
+    console.log("TAKE QUIZ ROUTE", currentUser)
+    if (!currentUser || currentUser.role !== "STUDENT") {
+      res.status(400).send(req.session);
+      return
+    }
+    const quiz = {
+      _id: uuid(),
+      quizID: qid,
+      userID: currentUser._id,
+      questions,
+      points
+    }
+    const result = dao.takeQuiz(quiz);
+    res.send(result);
   }
 
   app.get("/api/quizzes/courses/:cid", getQuizzesForCourse);
   app.post("/api/quizzes", createQuiz);
   app.delete("/api/quizzes/:qid", deleteQuiz)
   app.put("/api/quizzes/:qid", updateQuiz)
+  app.post("/api/quizzes/:qid", takeQuiz)
 }

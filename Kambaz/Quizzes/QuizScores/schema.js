@@ -11,7 +11,7 @@ export const questionScoreSchema = new Schema({
     type: Number,
     required: true
   }
-});
+}, { collection: "questionScores" });
 
 export const questionSchema = new Schema({
   _id: String,
@@ -35,5 +35,5 @@ export const quizScoresSchema = new mongoose.Schema(
     questions: [questionScoreSchema],
     points: { type: Schema.Types.Number, required: true }
   },
-  { collection: "quizzes" }
+  { collection: "quizScores" }
 );
